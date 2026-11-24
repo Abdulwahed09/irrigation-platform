@@ -1,0 +1,18 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>منصة مهندسي الري</title>
+<style>body{font-family:Tahoma,Arial,sans-serif;margin:0;background:#f3f8f3;color:#1b2a1b}header{background:#1f7a3d;color:#fff;padding:28px 20px;text-align:center}main{max-width:860px;margin:auto;padding:20px}section{background:#fff;border-radius:10px;padding:18px;margin:16px 0;box-shadow:0 1px 4px #0002}label{display:block;margin:8px 0 2px}input{padding:6px;width:100%;box-sizing:border-box}button{margin-top:10px;padding:8px 18px;background:#1f7a3d;color:#fff;border:0;border-radius:6px;cursor:pointer}table{width:100%;border-collapse:collapse}td,th{border:1px solid #ccc;padding:6px;text-align:center}.res{margin-top:10px;font-weight:bold;color:#1f7a3d}</style></head><body>
+<header><h1>منصة مهندسي الري</h1><p>شروحات، حاسبات، وبيانات</p></header><main>
+<section id="guides"><h2>الشروحات</h2><ul><li>أساسيات الري بالرش: التغطية والتداخل ومعدل الترسيب</li><li>تصميم الري بالتنقيط: اختيار النقاط والمسافات</li><li>اختيار قطر الماسورة وحساب الفاقد</li><li>جدولة الري وحساب زمن التشغيل</li></ul><p><small>محتوى مبدئي، هيتوسع قريبًا.</small></p></section>
+<section id="calc1"><h2>حاسبة زمن التشغيل</h2>
+<label>احتياج المياه اليومي (مم/يوم)</label><input id="et" type="number" value="6" step="0.1">
+<label>معدل الترسيب (مم/ساعة)</label><input id="pr" type="number" value="15" step="0.1">
+<label>كفاءة الري (%)</label><input id="ef" type="number" value="75">
+<button onclick="r1()">احسب</button><div class="res" id="o1"></div></section>
+<section id="calc2"><h2>حاسبة الفاقد في الماسورة (Hazen-Williams)</h2>
+<label>التصرف (م³/ساعة)</label><input id="q" type="number" value="20">
+<label>القطر الداخلي (مم)</label><input id="d" type="number" value="63">
+<label>الطول (م)</label><input id="l" type="number" value="100">
+<label>معامل C (PVC/PE ≈ 140-150)</label><input id="c" type="number" value="140">
+<button onclick="r2()">احسب</button><div class="res" id="o2"></div></section>
+<section id="data"><h2>جدول بيانات: الاحتياج المائي التقريبي (مم/يوم)</h2><table><tr><th>المحصول</th><th>صيفًا</th><th>شتاءً</th></tr><tr><td>طماطم</td><td>6-7</td><td>3-4</td></tr><tr><td>قمح</td><td>-</td><td>4-5</td></tr><tr><td>برسيم</td><td>7-8</td><td>4-5</td></tr><tr><td>نخيل</td><td>8-10</td><td>4-5</td></tr></table><p><small>قيم تقريبية للتوضيح فقط، لازم تتراجع قبل استخدامها في تصميم حقيقي.</small></p></section></main>
+<script>function r1(){let e=+et.value,p=+pr.value,f=+ef.value/100;o1.textContent='زمن التشغيل: '+(e/p/f).toFixed(2)+' ساعة/يوم ('+Math.round(e/p/f*60)+' دقيقة)'}
+function r2(){let q=+document.getElementById('q').value/3600,d=+document.getElementById('d').value/1000,l=+document.getElementById('l').value,c=+document.getElementById('c').value;let h=10.67*l*Math.pow(q,1.852)/(Math.pow(c,1.852)*Math.pow(d,4.87));o2.textContent='الفاقد: '+h.toFixed(2)+' م ('+(h/10.2).toFixed(3)+' بار) — السرعة '+(q/(Math.PI*d*d/4)).toFixed(2)+' م/ث'}</script></body></html>
